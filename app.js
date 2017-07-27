@@ -150,8 +150,8 @@ function receivedMessage(event) {
 		handleEcho(messageId, appId, metadata);
 		return;
 	} else if (quickReply) {
-		handleQuickReply(senderID, quickReply, messageId);
 		console.log("get quickReply");
+		handleQuickReply(senderID, quickReply, messageId);
 		return;
 	}
 
