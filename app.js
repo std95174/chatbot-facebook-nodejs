@@ -151,6 +151,7 @@ function receivedMessage(event) {
 		return;
 	} else if (quickReply) {
 		handleQuickReply(senderID, quickReply, messageId);
+		console.log("get quickReply");
 		return;
 	}
 
