@@ -269,6 +269,7 @@ function handleCardMessages(messages, sender) {
 
 
 function handleApiAiResponse(sender, response) {
+	console.log("handling respones from Api.ai...");
 	let responseText = response.result.fulfillment.speech;
 	let responseData = response.result.fulfillment.data;
 	let messages = response.result.fulfillment.messages;
@@ -327,12 +328,12 @@ function handleApiAiResponse(sender, response) {
 }
 
 function sendToApiAi(sender, text) {
-
+	console.log("sendToApi.ai");
 	sendTypingOn(sender);
 	let apiaiRequest = apiAiService.textRequest(text, {
 		sessionId: sessionIds.get(sender)
 	});
-
+	console.log("get response frome Api.ai");
 	apiaiRequest.on('response', (response) => {
 		if (isDefined(response.result)) {
 			handleApiAiResponse(sender, response);
