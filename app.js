@@ -133,7 +133,7 @@ function receivedMessage(event) {
 	if (!sessionIds.has(senderID)) {
 		sessionIds.set(senderID, uuid.v1());
 	}
-	console.log("Received message for user %d and page %d at %d with message:", senderID, recipientID, timeOfMessage);
+	console.log("Received message for user %d and page %d at %d with message: %s", senderID, recipientID, timeOfMessage, message.text);
 	//console.log(JSON.stringify(message));
 
 	var isEcho = message.is_echo;
@@ -695,8 +695,8 @@ function callSendAPI(messageData) {
 			var messageId = body.message_id;
 
 			if (messageId) {
-				console.log("Successfully sent message with id %s to recipient %s",
-					messageId, recipientId);
+				console.log("Successfully sent message with id %s to recipient %s and response: %s" ,
+					messageId, recipientId, response);
 			} else {
 				console.log("Successfully called Send API for recipient %s",
 					recipientId);
