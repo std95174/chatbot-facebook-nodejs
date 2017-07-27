@@ -696,7 +696,7 @@ function callSendAPI(messageData) {
 
 			if (messageId) {
 				console.log("Successfully sent message with id %s to recipient %s and response: %s" ,
-					messageId, recipientId, response.result.fulfillment.messages);
+					messageId, recipientId, response.text);
 			} else {
 				console.log("Successfully called Send API for recipient %s",
 					recipientId);
