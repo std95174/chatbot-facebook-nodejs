@@ -209,6 +209,11 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 				type:"web_url",
 				url:"https://www.104.com.tw",
 				title:"前往104",
+			},
+			{
+				type:"postback",
+        		title:"想聊天",
+        		payload:"chatting"
 			}
 			]
 			sendButtonMessage(sender, "想知道更多嗎？", buttons)
@@ -751,6 +756,10 @@ function sendTextMessage(recipientId, text) {
 	var payload = event.postback.payload;
 
 	switch (payload) {
+		case "chatting":
+			sendTextMessage(senderID, "想聊什麼呢？");
+			break;
+		
 		default:
 			//unindentified payload
 			sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
