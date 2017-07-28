@@ -1,3 +1,4 @@
+//Load module
 'use strict';
 
 const apiai = require('apiai');
@@ -9,7 +10,7 @@ const request = require('request');
 const app = express();
 const uuid = require('uuid');
 
-
+//檢查messenger api 變數
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
 	throw new Error('missing FB_PAGE_TOKEN');
@@ -27,8 +28,7 @@ if (!config.SERVER_URL) { //used for ink to static files
 	throw new Error('missing SERVER_URL');
 }
 
-
-
+//用port 500
 app.set('port', (process.env.PORT || 5000))
 
 //verify request came from facebook
@@ -58,7 +58,7 @@ const sessionIds = new Map();
 
 // Index route
 app.get('/', function (req, res) {
-	res.send('Hello world, I am a chat bot')
+	res.send('Hi, 我是e04~我想找工作的機器人')
 })
 
 // for Facebook verification
@@ -93,6 +93,7 @@ app.post('/webhook/', function (req, res) {
 			var pageID = pageEntry.id;
 			var timeOfEvent = pageEntry.time;
 
+			//分辨訊息種類，再分別執行方法
 			// Iterate over each messaging event
 			pageEntry.messaging.forEach(function (messagingEvent) {
 				if (messagingEvent.optin) {
@@ -125,7 +126,7 @@ app.post('/webhook/', function (req, res) {
 
 function receivedMessage(event) {
 
-	var senderID = event.sender.id;
+	var senderID = event.sender.id; //發送訊息的使用者
 	var recipientID = event.recipient.id;
 	var timeOfMessage = event.timestamp;
 	var message = event.message;
@@ -158,7 +159,7 @@ function receivedMessage(event) {
 
 	if (messageText) {
 		//send message to api.ai
-		console.log("get messageText");
+		console.log("get messageText and send it to api.ai");
 		sendToApiAi(senderID, messageText);
 	} else if (messageAttachments) {
 		handleMessageAttachments(messageAttachments, senderID);
@@ -168,7 +169,7 @@ function receivedMessage(event) {
 
 function handleMessageAttachments(messageAttachments, senderID){
 	//for now just reply
-	sendTextMessage(senderID, "Attachment received. Thank you.");	
+	sendTextMessage(senderID, "嗨，我收到你的讚/貼圖囉！謝謝您的支持！");	
 }
 
 function handleQuickReply(senderID, quickReply, messageId) {
@@ -270,6 +271,7 @@ function handleCardMessages(messages, sender) {
 
 function handleApiAiResponse(sender, response) {
 	console.log("handling respones from Api.ai...");
+	//從 api.ai 取得的資訊們 
 	let responseText = response.result.fulfillment.speech;
 	let responseData = response.result.fulfillment.data;
 	let messages = response.result.fulfillment.messages;
@@ -311,9 +313,9 @@ function handleApiAiResponse(sender, response) {
 	} else if (responseText == '' && !isDefined(action)) {
 		//api ai could not evaluate input.
 		console.log('Unknown query' + response.result.resolvedQuery);
-		sendTextMessage(sender, "I'm not sure what you want. Can you be more specific?");
+		sendTextMessage(sender, "我不確定您想要什麼，可以請您描述得詳細一點嗎？");
 	} else if (isDefined(action)) {
-		console.log("執行handleApiAiAction");
+		//如果api.ai 回傳action，執行handleApiAiAction
 		handleApiAiAction(sender, action, responseText, contexts, parameters);
 	} else if (isDefined(responseData) && isDefined(responseData.facebook)) {
 		try {
@@ -324,18 +326,19 @@ function handleApiAiResponse(sender, response) {
 			sendTextMessage(sender, err.message);
 		}
 	} else if (isDefined(responseText)) {
-		console.log("執行sendTextMessage");
+		console.log("執行 sendTextMessage");
 		sendTextMessage(sender, responseText);
 	}
 }
 
 function sendToApiAi(sender, text) {
-	console.log("sendToApi.ai");
+	console.log("run sendToApiAi"+ text);
 	sendTypingOn(sender);
 	let apiaiRequest = apiAiService.textRequest(text, {
 		sessionId: sessionIds.get(sender)
 	});
-	console.log("get response frome Api.ai");
+	console.log("get response frome Api.ai and handle");
+	//處理api.ai的response
 	apiaiRequest.on('response', (response) => {
 		if (isDefined(response.result)) {
 			handleApiAiResponse(sender, response);
