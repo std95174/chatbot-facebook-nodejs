@@ -191,17 +191,13 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 			if (isDefined(contexts[0]) && contexts[0].name == 'juice' && contexts[0].parameters){
 				let juice = (isDefined(contexts[0].parameters['juice']) && contexts[0].parameters['juice']!='')?contexts[0].parameters['juice']:'';
 				let name = (isDefined(contexts[0].parameters['name']) && contexts[0].parameters['name']!='')?contexts[0].parameters['name']:'';
+				let addText = "";
 
 				if(juice!='' && name!=''){
 					addText = " 已紀錄您點的飲料！";
 				}
 			}
-			if (isDefined(addText)){
-				sendTextMessage(sender, responseText+addText);	
-			}else{
-				sendTextMessage(sender, responseText);
-			}
-			
+				sendTextMessage(sender, responseText+addText);
 			break;
 		default:
 			//unhandled action, just send back the text
