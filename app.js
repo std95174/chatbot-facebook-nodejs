@@ -211,7 +211,7 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 				title:"前往104",
 			}
 			]
-			sendButtonMessage(send, "想知道更多嗎？", buttons)
+			sendButtonMessage(sender, "想知道更多嗎？", buttons)
 		}
 	}
 
