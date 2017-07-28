@@ -187,8 +187,8 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 	switch (action) {
-		case "detailed-application":
-			if (isDefined(contexts[0]) && contexts[0].name == 'juice-ans' && contexts[0].parameters){
+		case "juice-ans":
+			if (isDefined(contexts[0]) && contexts[0].name == 'juice' && contexts[0].parameters){
 				let juice = (isDefined(contexts[0].parameters['juice']) && contexts[0].parameters['juice']!='')?contexts[0].parameters['juice']:'';
 				let name = (isDefined(contexts[0].parameters['name']) && contexts[0].parameters['name']!='')?contexts[0].parameters['name']:'';
 
