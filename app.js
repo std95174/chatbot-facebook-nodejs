@@ -196,7 +196,12 @@ function handleApiAiAction(sender, action, responseText, contexts, parameters) {
 					addText = " 已紀錄您點的飲料！";
 				}
 			}
-			sendTextMessage(sender, responseText+addText);
+			if (isDefined(addText)){
+				sendTextMessage(sender, responseText+addText);	
+			}else{
+				sendTextMessage(sender, responseText);
+			}
+			
 			break;
 		default:
 			//unhandled action, just send back the text
