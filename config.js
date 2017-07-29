@@ -3,5 +3,5 @@ module.exports = {
     FB_VERIFY_TOKEN: 'my_chatbot_for_104hack',
     API_AI_CLIENT_ACCESS_TOKEN: '8bf8003aa0bb400f956b89f9c3d36d62',
     FB_APP_SECRET: 'd96827aca6b813b3349db5689c5ca4af',
-    SERVER_URL: "https://bot-104hackthon-fb.herokuapp.com",
+    SERVER_URL: "https://5d97cc65.ngrok.io",
 };
