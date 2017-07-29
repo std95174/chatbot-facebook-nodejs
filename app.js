@@ -693,7 +693,7 @@ function sendTextMessage(recipientId, text) {
 				console.log("FB user: %s %s, %s",
 					user.first_name, user.last_name, user.gender);
 
-				sendTextMessage(userId, "Welcome " + user.first_name + '!');
+				sendTextMessage(userId, "嗨，" + user.first_name + '！'+"最近好嗎？ \u000A 有問題歡迎直接問我，或是點選對話欄左側功能表！");
 			} else {
 				console.log("Cannot get data for fb user with id",
 					userId);
@@ -756,6 +756,9 @@ function sendTextMessage(recipientId, text) {
 	var payload = event.postback.payload;
 
 	switch (payload) {
+		case "GET_STARTED":
+			greetUserText(senderID);
+			break;
 		case "chatting":
 			sendTextMessage(senderID, "想聊什麼呢？");
 			break;
