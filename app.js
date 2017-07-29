@@ -693,7 +693,7 @@ function sendTextMessage(recipientId, text) {
 				console.log("FB user: %s %s, %s",
 					user.first_name, user.last_name, user.gender);
 
-				sendTextMessage(userId, "嗨，" + user.first_name + '！'+"最近好嗎？ \u000A 有問題歡迎直接問我，或是點選對話欄左側功能表！");
+				sendTextMessage(userId, "嗨，" + user.first_name + '！'+"最近好嗎？\u000A有問題歡迎直接問我，或是點選對話欄左側功能表！");
 			} else {
 				console.log("Cannot get data for fb user with id",
 					userId);
